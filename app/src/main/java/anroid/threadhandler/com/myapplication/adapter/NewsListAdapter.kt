@@ -6,39 +6,51 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import anroid.threadhandler.com.myapplication.R
 import anroid.threadhandler.com.myapplication.databinding.LayoutNewsItemBinding
-import anroid.threadhandler.com.myapplication.retrofit.DataModel
+import anroid.threadhandler.com.myapplication.retrofit.Children
+import anroid.threadhandler.com.myapplication.retrofit.DataX
+import anroid.threadhandler.com.myapplication.vm.ItemViewModel
+
 
 class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
-    lateinit var binding:LayoutNewsItemBinding
+    lateinit var binding: LayoutNewsItemBinding
+    private var dataList: List<Children>? = null
 
-    private var dataList:List<DataModel> ?= null
-    init{
-        this.dataList = emptyList<DataModel>()
+    init {
+        this.dataList = emptyList<Children>()
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
+
         binding = DataBindingUtil.inflate(
-           LayoutInflater.from(parent.context),
-           R.layout.layout_news_item,parent,false)
+            LayoutInflater.from(parent.context),
+            R.layout.layout_news_item, parent, false
+        )
         return ViewHolder(binding)
     }
 
 
     override fun getItemCount(): Int {
-       return dataList!!.size
+        return dataList!!.size
     }
 
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(dataList?.get(position)!!.data)
     }
 
-    fun setData(){
-        //TODO we need to get data here and update
+    fun setData(list: List<Children>) {
+        this.dataList = list
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder (itemView: LayoutNewsItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(internal var local: LayoutNewsItemBinding) : RecyclerView.ViewHolder(local.item) {
 
-
+        fun bind(item: DataX) {
+            if (local.itemViewModel == null) {
+                local.setItemViewModel(ItemViewModel(itemView.context, item))
+            } else {
+                local.itemViewModel!!.setData(item)
+            }
+        }
     }
 }

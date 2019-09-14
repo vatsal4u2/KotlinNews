@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <variable name="itemViewModel"
+                  type="anroid.threadhandler.com.myapplication.vm.ItemViewModel"/>
 
     </data>
     <android.support.constraint.ConstraintLayout
+            android:id="@+id/item"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp">
+
+        <TextView
+                android:id="@+id/textview_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:textAlignment="center"
+                android:text="@{itemViewModel.title}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="2dp"/>
+        <ImageView
+                android:id="@+id/imageView_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textview_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:src="@mipmap/ic_launcher"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

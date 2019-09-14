@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="anroid.threadhandler.com.myapplication">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:name=".MyAppClass"
             android:allowBackup="true"
