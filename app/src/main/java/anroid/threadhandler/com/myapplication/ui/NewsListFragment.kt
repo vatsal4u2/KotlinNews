@@ -8,13 +8,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import anroid.threadhandler.com.myapplication.NewsApp
 import anroid.threadhandler.com.myapplication.R
 import anroid.threadhandler.com.myapplication.adapter.NewsListAdapter
 import anroid.threadhandler.com.myapplication.databinding.LayoutNewsListFragmentBinding
+import anroid.threadhandler.com.myapplication.retrofit.model.DataX
 import anroid.threadhandler.com.myapplication.vm.NewsListViewModel
+import kotlinx.android.synthetic.main.layout_news_list_fragment.*
 import java.util.*
-
-
 
 
 class NewsListFragment : Fragment(), Observer {
@@ -32,25 +33,31 @@ class NewsListFragment : Fragment(), Observer {
             false
         )
         binding.lifecycleOwner = this
-        
+
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         newsListViewModel = NewsListViewModel(context!!)
+
         binding.recyclerView.apply {
-            val adapter = NewsListAdapter()
             val layoutManager = LinearLayoutManager(context)
+            val adapter = NewsListAdapter()
             this.layoutManager = layoutManager
             this.adapter = adapter
             this.hasFixedSize()
             this.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
+            adapter.setOnItemClickListener(object : NewsListAdapter.OnItemClickListener {
+                override fun onClick(view: View, data: DataX) {
+                    val currentActivity = NewsApp.appContext.activityContext
+                    currentActivity?.goTo(data)
+                }
+            })
+
         }
 
         binding.newsListViewModel = newsListViewModel
-
-
         setupObserver(newsListViewModel)
     }
 

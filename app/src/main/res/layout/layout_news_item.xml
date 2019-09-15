@@ -4,19 +4,20 @@
     <data>
         <import type="android.view.View"/>
         <import type="android.text.TextUtils"/>
-        <variable name="itemViewModel"
-                  type="anroid.threadhandler.com.myapplication.vm.ItemViewModel"/>
+
+        <variable name="data"
+                  type="anroid.threadhandler.com.myapplication.retrofit.model.DataX"/>
+
 
     </data>
     <android.support.constraint.ConstraintLayout
-            android:id="@+id/item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-           android:onClick="@{itemViewModel::setItemClickListener}">
+            android:layout_marginBottom="2dp">
 
         <android.support.v7.widget.CardView
+                android:id="@+id/item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="2dp"
@@ -33,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:textAlignment="center"
-                android:text="@{itemViewModel.title}"
+                android:text="@{data.title}"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginTop="2dp"/>
@@ -45,8 +46,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:visibility="@{TextUtils.isEmpty(itemViewModel.thumbnail)?View.GONE : View.VISIBLE}"
-                bind:thumbnailImage="@{itemViewModel.thumbnail}"
+                android:visibility="@{TextUtils.isEmpty(data.safe_thumbnail)?View.GONE : View.VISIBLE}"
+                bind:thumbnailImage="@{data.safe_thumbnail}"
                 />
         </android.support.v7.widget.CardView>
 

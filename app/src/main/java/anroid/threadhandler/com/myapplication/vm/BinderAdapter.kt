@@ -10,7 +10,7 @@ import android.databinding.BindingAdapter
 import android.widget.ImageView
 
 
-class ItemViewModel(internal var context: Context,private var itemData: DataX?): Observable() {
+class BinderAdapter : Observable() {
 
     companion object {
         @JvmStatic
@@ -22,19 +22,4 @@ class ItemViewModel(internal var context: Context,private var itemData: DataX?):
         }
     }
 
-    val title : String?
-        get() = itemData!!.title ?:""
-
-    val thumbnail : String?
-        get() = itemData?.secureMedia?.oembed?.thumbnailUrl ?: ""
-
-    fun setData(itemData: DataX){
-        this.itemData = itemData
-    }
-
-
-    fun setItemClickListener(view: View){
-        val currentActivity = appContext.activityContext
-        currentActivity?.goTo(itemData)
-    }
 }

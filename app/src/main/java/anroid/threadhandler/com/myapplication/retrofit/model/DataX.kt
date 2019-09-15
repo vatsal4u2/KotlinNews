@@ -1,5 +1,7 @@
 package anroid.threadhandler.com.myapplication.retrofit.model
 
+import android.view.View
+import anroid.threadhandler.com.myapplication.NewsApp
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -191,4 +193,8 @@ data class DataX(
     val whitelistStatus: String,
     @SerializedName("wls")
     val wls: Int
-) : Serializable
+) : Serializable{
+
+    val safe_thumbnail : String?
+        get() = secureMedia?.oembed?.thumbnailUrl ?: ""
+}
