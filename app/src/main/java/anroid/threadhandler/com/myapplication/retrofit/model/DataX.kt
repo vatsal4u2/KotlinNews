@@ -1,7 +1,7 @@
 package anroid.threadhandler.com.myapplication.retrofit.model
 
-
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class DataX(
 
@@ -191,4 +191,4 @@ data class DataX(
     val whitelistStatus: String,
     @SerializedName("wls")
     val wls: Int
-)
+) : Serializable

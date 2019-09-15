@@ -14,6 +14,9 @@ import anroid.threadhandler.com.myapplication.databinding.LayoutNewsListFragment
 import anroid.threadhandler.com.myapplication.vm.NewsListViewModel
 import java.util.*
 
+
+
+
 class NewsListFragment : Fragment(), Observer {
 
     lateinit var newsListViewModel: NewsListViewModel

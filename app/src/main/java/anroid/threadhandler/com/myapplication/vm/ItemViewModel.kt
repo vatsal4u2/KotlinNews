@@ -7,7 +7,6 @@ import anroid.threadhandler.com.myapplication.retrofit.model.DataX
 import java.util.*
 import com.bumptech.glide.Glide
 import android.databinding.BindingAdapter
-import android.databinding.ObservableField
 import android.widget.ImageView
 
 
@@ -36,6 +35,6 @@ class ItemViewModel(internal var context: Context,private var itemData: DataX?):
 
     fun setItemClickListener(view: View){
         val currentActivity = appContext.activityContext
-        currentActivity?.goTo()
+        currentActivity?.goTo(itemData)
     }
 }
