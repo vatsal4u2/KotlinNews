@@ -1,15 +1,14 @@
 package anroid.threadhandler.com.myapplication.vm
 
 import android.content.Context
-import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import anroid.threadhandler.com.myapplication.retrofit.ApiClient
 import anroid.threadhandler.com.myapplication.retrofit.ApiInterface
-import anroid.threadhandler.com.myapplication.retrofit.Children
-import anroid.threadhandler.com.myapplication.retrofit.CustomDataModel
+import anroid.threadhandler.com.myapplication.retrofit.model.Children
+import anroid.threadhandler.com.myapplication.retrofit.model.CustomDataModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

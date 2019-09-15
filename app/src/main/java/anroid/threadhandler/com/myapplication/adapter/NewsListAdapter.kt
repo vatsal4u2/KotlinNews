@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import anroid.threadhandler.com.myapplication.R
 import anroid.threadhandler.com.myapplication.databinding.LayoutNewsItemBinding
-import anroid.threadhandler.com.myapplication.retrofit.Children
-import anroid.threadhandler.com.myapplication.retrofit.DataX
+import anroid.threadhandler.com.myapplication.retrofit.model.Children
+import anroid.threadhandler.com.myapplication.retrofit.model.DataX
 import anroid.threadhandler.com.myapplication.vm.ItemViewModel
 
 

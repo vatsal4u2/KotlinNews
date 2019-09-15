@@ -14,7 +14,17 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:background="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/toolbar_title"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+        </Toolbar>
 
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"

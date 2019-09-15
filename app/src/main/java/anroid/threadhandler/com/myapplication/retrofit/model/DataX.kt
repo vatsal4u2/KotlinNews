@@ -1,4 +1,4 @@
-package anroid.threadhandler.com.myapplication.retrofit
+package anroid.threadhandler.com.myapplication.retrofit.model
 
 
 import com.google.gson.annotations.SerializedName
@@ -146,7 +146,7 @@ data class DataX(
     @SerializedName("score")
     val score: Int,
     @SerializedName("secure_media")
-    val secureMedia: Any,
+    val secureMedia: SecureMedia,
     @SerializedName("selftext")
     val selftext: String,
     @SerializedName("selftext_html")

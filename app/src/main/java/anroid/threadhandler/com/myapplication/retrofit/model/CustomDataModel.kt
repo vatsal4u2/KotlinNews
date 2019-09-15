@@ -1,4 +1,4 @@
-package anroid.threadhandler.com.myapplication.retrofit
+package anroid.threadhandler.com.myapplication.retrofit.model
 
 
 import com.google.gson.annotations.SerializedName
