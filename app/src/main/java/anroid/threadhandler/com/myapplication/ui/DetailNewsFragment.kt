@@ -6,14 +6,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
-import anroid.threadhandler.com.myapplication.MyAppClass
-import anroid.threadhandler.com.myapplication.MyAppClass.Companion.appContext
+import anroid.threadhandler.com.myapplication.NewsApp.Companion.appContext
 import anroid.threadhandler.com.myapplication.R
 import anroid.threadhandler.com.myapplication.databinding.LayoutNewsDetailFragmentBinding
 import anroid.threadhandler.com.myapplication.retrofit.model.DataX
 import anroid.threadhandler.com.myapplication.vm.DetailNewsViewModel
-import kotlinx.android.synthetic.main.layout_news_detail_fragment.*
 import java.util.*
 
 class DetailNewsFragment:Fragment(), Observer {

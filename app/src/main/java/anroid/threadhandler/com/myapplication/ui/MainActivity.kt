@@ -4,7 +4,7 @@ import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import anroid.threadhandler.com.myapplication.MyAppClass.Companion.appContext
+import anroid.threadhandler.com.myapplication.NewsApp.Companion.appContext
 import anroid.threadhandler.com.myapplication.R
 import anroid.threadhandler.com.myapplication.databinding.ActivityMainBinding
 import anroid.threadhandler.com.myapplication.retrofit.model.DataX
@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goTo(item: DataX?){
-        Toast.makeText(this, "DetailListFragment",Toast.LENGTH_LONG).show()
         supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)

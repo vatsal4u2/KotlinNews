@@ -5,6 +5,7 @@ import android.databinding.ObservableInt
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import anroid.threadhandler.com.myapplication.R
 import anroid.threadhandler.com.myapplication.retrofit.ApiClient
 import anroid.threadhandler.com.myapplication.retrofit.ApiInterface
 import anroid.threadhandler.com.myapplication.retrofit.model.Children
@@ -19,11 +20,13 @@ class NewsListViewModel(internal var context: Context):Observable() {
 
     var progressBar : ObservableInt
     var recyclerView: ObservableInt
+    var errorTextView : ObservableInt
     var newsList = ArrayList<Children>()
 
     init {
         progressBar = ObservableInt(View.VISIBLE)
         recyclerView = ObservableInt(View.INVISIBLE)
+        errorTextView = ObservableInt(View.GONE)
         fetchNewsList()
     }
 
@@ -44,12 +47,14 @@ class NewsListViewModel(internal var context: Context):Observable() {
                     Toast.makeText(context, "sucess", Toast.LENGTH_SHORT).show()
                 } else {
                     progressBar.set(View.GONE)
+                    errorTextView.set(View.VISIBLE)
                     Toast.makeText(context, "failure1", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<CustomDataModel>, t: Throwable) {
                 progressBar.set(View.GONE)
+                errorTextView.set(View.VISIBLE)
                 Toast.makeText(context, "failure2", Toast.LENGTH_SHORT).show()
                 Log.d("error", t.message)
             }

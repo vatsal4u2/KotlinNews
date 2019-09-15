@@ -3,7 +3,7 @@ package anroid.threadhandler.com.myapplication
 import android.app.Application
 import anroid.threadhandler.com.myapplication.ui.MainActivity
 
-class MyAppClass : Application(){
+class NewsApp : Application(){
 
     var activityContext : MainActivity? = null
 
@@ -14,7 +14,7 @@ class MyAppClass : Application(){
 
 
     companion object {
-        lateinit var appContext: MyAppClass
+        lateinit var appContext: NewsApp
     }
 
 }

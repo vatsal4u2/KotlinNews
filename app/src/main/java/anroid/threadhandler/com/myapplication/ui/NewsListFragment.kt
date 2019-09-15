@@ -32,7 +32,7 @@ class NewsListFragment : Fragment(), Observer {
             false
         )
         binding.lifecycleOwner = this
-
+        
         return binding.root
     }
 
