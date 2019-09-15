@@ -5,7 +5,6 @@ import android.databinding.ObservableInt
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import anroid.threadhandler.com.myapplication.R
 import anroid.threadhandler.com.myapplication.retrofit.ApiClient
 import anroid.threadhandler.com.myapplication.retrofit.ApiInterface
 import anroid.threadhandler.com.myapplication.retrofit.model.Children
@@ -44,7 +43,6 @@ class NewsListViewModel(internal var context: Context):Observable() {
                     recyclerView.set(View.VISIBLE)
                     updateNewsList(response.body()!!)
                     Log.d("response",response.body().toString())
-                    Toast.makeText(context, "sucess", Toast.LENGTH_SHORT).show()
                 } else {
                     progressBar.set(View.GONE)
                     errorTextView.set(View.VISIBLE)
@@ -63,6 +61,7 @@ class NewsListViewModel(internal var context: Context):Observable() {
 
     fun updateNewsList(body : CustomDataModel){
         body.let {
+            newsList.clear()
             newsList.addAll( body.data.children)
             setChanged()
             notifyObservers()
