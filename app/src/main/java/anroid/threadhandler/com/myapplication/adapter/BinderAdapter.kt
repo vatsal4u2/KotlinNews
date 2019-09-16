@@ -1,4 +1,4 @@
-package anroid.threadhandler.com.myapplication.vm
+package anroid.threadhandler.com.myapplication.adapter
 
 import android.content.Context
 import android.view.View

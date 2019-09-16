@@ -37,9 +37,9 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(dataList?.get(position)!!.data)
-        holder.binding.item.setOnClickListener({
+        holder.binding.item.setOnClickListener {
             listener.onClick(it,dataList?.get(position)!!.data)
-        })
+        }
     }
 
     fun setData(list: List<Children>) {
