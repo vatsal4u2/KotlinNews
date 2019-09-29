@@ -1,5 +1,6 @@
 package anroid.threadhandler.com.myapplication.ui
 
+import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,15 +15,17 @@ import anroid.threadhandler.com.myapplication.adapter.NewsListAdapter
 import anroid.threadhandler.com.myapplication.databinding.LayoutNewsListFragmentBinding
 import anroid.threadhandler.com.myapplication.retrofit.model.DataX
 import anroid.threadhandler.com.myapplication.vm.NewsListViewModel
-import kotlinx.android.synthetic.main.layout_news_list_fragment.*
-import java.util.*
 
 
-class NewsListFragment : Fragment(), Observer {
-
-    lateinit var newsListViewModel: NewsListViewModel
+class NewsListFragment : Fragment() {
     lateinit var binding: LayoutNewsListFragmentBinding
+    lateinit var vm: NewsListViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        vm = ViewModelProviders.of(this).get(NewsListViewModel::class.java)
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -32,14 +35,14 @@ class NewsListFragment : Fragment(), Observer {
             null,
             false
         )
-        binding.lifecycleOwner = this
 
+        binding.newsListViewModel = vm
+        binding.lifecycleOwner = this
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        newsListViewModel = NewsListViewModel(context!!)
 
         binding.recyclerView.apply {
             val layoutManager = LinearLayoutManager(context)
@@ -56,22 +59,11 @@ class NewsListFragment : Fragment(), Observer {
             })
 
         }
-
-        binding.newsListViewModel = newsListViewModel
-        setupObserver(newsListViewModel)
-    }
-
-
-    private fun setupObserver(observable: Observable) {
-        observable.addObserver(this)
-    }
-
-    // note : Observer call back method.
-    override fun update(p0: Observable?, p1: Any?) {
-        if (p0 is NewsListViewModel) {
+        vm.getList().observe(this, android.arch.lifecycle.Observer {
             val adapter = binding.recyclerView.adapter as NewsListAdapter
-            adapter.setData(newsListViewModel.getNewsList())
-        }
+            adapter.setData(it)
+        })
+
     }
 
     companion object {

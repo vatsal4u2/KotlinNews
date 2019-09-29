@@ -42,7 +42,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
         }
     }
 
-    fun setData(list: List<Children>) {
+    fun setData(list: List<Children>?) {
         this.dataList = list
         notifyDataSetChanged()
     }

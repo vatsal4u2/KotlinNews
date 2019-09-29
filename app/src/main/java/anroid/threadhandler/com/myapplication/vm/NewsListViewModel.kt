@@ -1,10 +1,11 @@
 package anroid.threadhandler.com.myapplication.vm
 
-import android.content.Context
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableInt
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import anroid.threadhandler.com.myapplication.retrofit.ApiClient
 import anroid.threadhandler.com.myapplication.retrofit.ApiInterface
 import anroid.threadhandler.com.myapplication.retrofit.model.Children
@@ -12,20 +13,20 @@ import anroid.threadhandler.com.myapplication.retrofit.model.CustomDataModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
 
-class NewsListViewModel(internal var context: Context):Observable() {
+class NewsListViewModel:ViewModel(){
 
     var progressBar : ObservableInt
     var recyclerView: ObservableInt
     var errorTextView : ObservableInt
-    var newsList = ArrayList<Children>()
+    private val newsList =  mutableListOf<Children>()
+    private val list = MutableLiveData<List<Children>>()
 
     init {
         progressBar = ObservableInt(View.VISIBLE)
         recyclerView = ObservableInt(View.INVISIBLE)
         errorTextView = ObservableInt(View.GONE)
+        list.value = newsList
         fetchNewsList()
     }
 
@@ -46,14 +47,14 @@ class NewsListViewModel(internal var context: Context):Observable() {
                 } else {
                     progressBar.set(View.GONE)
                     errorTextView.set(View.VISIBLE)
-                    Toast.makeText(context, "failure1", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context, "failure1", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<CustomDataModel>, t: Throwable) {
                 progressBar.set(View.GONE)
                 errorTextView.set(View.VISIBLE)
-                Toast.makeText(context, "failure2", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(context, "failure2", Toast.LENGTH_SHORT).show()
                 Log.d("error", t.message)
             }
         })
@@ -62,13 +63,9 @@ class NewsListViewModel(internal var context: Context):Observable() {
     fun updateNewsList(body : CustomDataModel){
         body.let {
             newsList.clear()
-            newsList.addAll( body.data.children)
-            setChanged()
-            notifyObservers()
+            newsList.addAll(body.data.children)
         }
     }
 
-    fun getNewsList():List<Children>{
-        return newsList
-    }
+    fun getList() = list  as LiveData<List<Children>>
 }

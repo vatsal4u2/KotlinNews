@@ -1,5 +1,6 @@
 package anroid.threadhandler.com.myapplication.ui
 
+import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,10 +14,15 @@ import anroid.threadhandler.com.myapplication.retrofit.model.DataX
 import anroid.threadhandler.com.myapplication.vm.DetailNewsViewModel
 import java.util.*
 
-class DetailNewsFragment:Fragment(), Observer {
+class DetailNewsFragment:Fragment(){
 
     lateinit var binding:LayoutNewsDetailFragmentBinding
-    lateinit var viewModel : DetailNewsViewModel
+    lateinit var vm : DetailNewsViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        vm = ViewModelProviders.of(this).get(DetailNewsViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -24,28 +30,19 @@ class DetailNewsFragment:Fragment(), Observer {
             R.layout.layout_news_detail_fragment,
             container,
             false)
-        viewModel = DetailNewsViewModel(context!!)
+        binding.detialNewsViewModel = vm
         binding.lifecycleOwner = this
-        binding.detialNewsViewModel = viewModel
         val toolbar = binding.toolbar
         toolbar.setNavigationIcon(R.drawable.ic_back_arrow)
         toolbar.setNavigationOnClickListener(View.OnClickListener {
             appContext.activityContext?.onBackPressed()
         })
 
-        viewModel.setData(arguments?.getSerializable(NEWS_ITEM) as DataX)
-        setupObserver(viewModel)
 
+
+        vm.setData(arguments?.getSerializable(NEWS_ITEM) as DataX)
 
         return binding.root
-    }
-
-    private fun setupObserver(observable: Observable) {
-        observable.addObserver(this)
-    }
-
-    override fun update(p0: Observable?, p1: Any?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     companion object {

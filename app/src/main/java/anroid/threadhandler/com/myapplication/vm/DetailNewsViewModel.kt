@@ -1,11 +1,20 @@
 package anroid.threadhandler.com.myapplication.vm
 
+import android.annotation.SuppressLint
+import android.arch.lifecycle.ViewModel
 import android.content.Context
+import anroid.threadhandler.com.myapplication.NewsApp
 import anroid.threadhandler.com.myapplication.R
 import anroid.threadhandler.com.myapplication.retrofit.model.DataX
 import java.util.*
 
-class DetailNewsViewModel(internal var context: Context) : Observable() {
+class DetailNewsViewModel : ViewModel() {
+    @SuppressLint("StaticFieldLeak")
+    var context: Context
+
+    init {
+        context = NewsApp.appContext
+    }
     var item :DataX ?= null
 
     val body : String?
